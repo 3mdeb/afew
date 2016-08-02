@@ -18,6 +18,7 @@ from __future__ import print_function, absolute_import, unicode_literals
 #
 
 import os
+import codecs
 
 from .configparser import RawConfigParser
 
@@ -27,7 +28,7 @@ def read_notmuch_settings(path = None):
     if path == None:
         path = os.environ.get('NOTMUCH_CONFIG', os.path.expanduser('~/.notmuch-config'))
 
-    notmuch_settings.readfp(open(path))
+    notmuch_settings.readfp(codecs.open(path, "r", encoding='utf-8'))
 
 def get_notmuch_new_tags():
     return notmuch_settings.get_list('new', 'tags')
